@@ -10,8 +10,14 @@ readme = "README.md"
 
 [dependencies]
 structopt = "0.2.10"
+futures = "0.1.23"
+hyper = "0.12.7"
+clap_flags = "0.2.0"
+tokio = "0.1.7"
+log = "0.4.3"
 
 [dev-dependencies]
 
 [build-dependencies]
 structopt = "0.2.10"
+clap_flags = "0.2.0"
