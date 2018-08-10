@@ -1,0 +1,17 @@
+[package]
+name = "http_01"
+version = "0.1.0"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/yoshuawuyts/http_01"
+documentation = "https://docs.rs/http_01"
+description = "Hello-world HTTP server"
+authors = ["Yoshua Wuyts <yoshuawuyts@gmail.com>"]
+readme = "README.md"
+
+[dependencies]
+structopt = "0.2.10"
+
+[dev-dependencies]
+
+[build-dependencies]
+structopt = "0.2.10"
