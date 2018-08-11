@@ -3,7 +3,8 @@ Timing how long it takes to build HTTP services in Rust.
 
 ## Timings
 ```txt
-01  Hello World    17m
+01  Hello World       17m
+02  Signup Login   02h50m
 ```
 
 ## Notes
@@ -26,7 +27,7 @@ Timing how long it takes to build HTTP services in Rust.
 - Found out that Argon2 stores the Salt in the hash itself, so there's only one
   value that needs to be stored. That's really nice tbh!
 - We should have a standard logger thing for info. Couldn't get the built-in
-  warp logger to work, but didn't spend too uch time on this either haha.
+  warp logger to work, but didn't spend too much time on this either haha.
 
 ## License
 [MIT](./LICENSE-MIT) OR [Apache-2.0](./LICENSE-APACHE)
