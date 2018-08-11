@@ -15,5 +15,18 @@ Timing how long it takes to build HTTP services in Rust.
   from scratch. That probably sped up things a lot.
 - We didn't add a router. We should probably add _some_ routing next time.
 
+### 02 - Signup Login
+- Used an `Arc<Mutex<HashMap>>` as the database.
+- This is a pretty great pattern to emulate any more difficult databases. Maybe
+  we should make that a crate? Memdb? Testdb? Something like that.
+- I'm not sure how to handle errors in Warp yet. Maybe we need to specify a
+  return type to handle it correctly.
+- similarly I don't know how to return a filter from a function. That took a
+  while to figure out, and eventually had to abandon it.
+- Found out that Argon2 stores the Salt in the hash itself, so there's only one
+  value that needs to be stored. That's really nice tbh!
+- We should have a standard logger thing for info. Couldn't get the built-in
+  warp logger to work, but didn't spend too uch time on this either haha.
+
 ## License
 [MIT](./LICENSE-MIT) OR [Apache-2.0](./LICENSE-APACHE)
