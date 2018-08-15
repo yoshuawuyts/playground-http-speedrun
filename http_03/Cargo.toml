@@ -1,0 +1,21 @@
+[package]
+name = "http_03"
+version = "0.1.0"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/yoshuawuyts/http_03"
+documentation = "https://docs.rs/http_03"
+description = "HTTP hello-world"
+authors = ["Yoshua Wuyts <yoshuawuyts@gmail.com>"]
+readme = "README.md"
+
+[dependencies]
+structopt = "0.2.10"
+clap_flags = "0.2.0"
+log = "0.4.3"
+hyper = "0.12.8"
+futures = "0.1.23"
+tokio = "0.1.7"
+
+[build-dependencies]
+structopt = "0.2.10"
+clap_flags = "0.2.0"
