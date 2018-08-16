@@ -1,0 +1,23 @@
+[package]
+name = "http_04"
+version = "0.1.0"
+authors = ["Yoshua Wuyts <yoshuawuyts@gmail.com>"]
+
+[dependencies]
+structopt = "0.2.10"
+log = "0.4.3"
+clap_flags = "0.2.0"
+secure-password = "0.3.1"
+hyper = "0.12.8"
+tokio = "0.1.7"
+futures = "0.1.23"
+human-panic = "1.0.0"
+memdb = "0.1.0"
+serde_qs = "0.4.1"
+serde_derive = "1.0.71"
+serde = "1.0.71"
+failure = "0.1.2"
+
+[build-dependencies]
+structopt = "0.2.10"
+clap_flags = "0.2.0"
