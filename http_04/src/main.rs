@@ -46,14 +46,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         info!("route {}", req.uri().path());
 
         match req.uri().path() {
-          "/signup" => {
-            signup(&req, &mut db).unwrap();
-            Ok(Response::default())
-          }
-          "/login" => {
-            login(&req, &mut db).unwrap();
-            Ok(Response::default())
-          }
+          "/signup" => Ok(signup(&req, &mut db).unwrap()),
+          "/login" => Ok(login(&req, &mut db).unwrap()),
           _ => Ok(Response::builder().status(404).body(Body::empty()).unwrap()),
         }
       },
@@ -78,7 +72,7 @@ struct Credentials {
 fn signup(
   req: &Request<Body>,
   db: &mut Memdb<String, Vec<u8>>,
-) -> Result<(), Error> {
+) -> Result<Response<Body>, Error> {
   let query = match req.uri().query() {
     Some(query) => query,
     None => bail!("No query provided"),
@@ -87,13 +81,13 @@ fn signup(
   let hash = secure_password::hash(&creds.password.as_bytes())?;
   debug!("Created account for {}", &creds.username);
   db.set(creds.username, hash);
-  Ok(())
+  Ok(Response::default())
 }
 
 fn login(
   req: &Request<Body>,
   db: &mut Memdb<String, Vec<u8>>,
-) -> Result<(), Error> {
+) -> Result<Response<Body>, Error> {
   let query = match req.uri().query() {
     Some(query) => query,
     None => bail!("No query provided"),
@@ -106,5 +100,5 @@ fn login(
   };
   ensure!(secure_password::verify(pass, &hash)?, "Failed to login");
   debug!("Signed in {}", &creds.username);
-  Ok(())
+  Ok(Response::default())
 }

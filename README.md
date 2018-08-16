@@ -6,6 +6,7 @@ Timing how long it takes to build HTTP services in Rust.
 01  Hello World       17m
 02  Signup Login   02h50m
 03  Hello World       14m
+04  Signup Login      48m
 ```
 
 ## Notes
@@ -43,6 +44,27 @@ Timing how long it takes to build HTTP services in Rust.
   future in Rust. Having to use combinators still feels a bit awkward to me.
 - I'm not sure how to close a server if an error limit is exceeded in a time
   frame. All we can do for now is log a bunch of things.
+
+### [04 - Signup Login](./http_04)
+- Error handling is closer than it was before, but it's still not great. We have
+  several unwraps in the code.
+  - `hyper` doesn't seem to accept `failure::Error` return types from its
+    `Service` method.
+  - `serde_qs`'s error type doesn't seem compatible with `failure` either.
+  - Converting `Option` to `Result` is also a bit tedious. It would be grand if
+    `failure` could support this too.
+  - A final thing that would be grand is to have an `Error` + `ErrorKind` pair,
+    coupled with status codes. It'd be fantastic if all errors could be
+    enumerated, and status codes could be derived from them.
+- There's a good amount of `move` and `.clone()` going on. This feels rather
+  icky. I'm still not sure what the right abstraction there is, but probably
+  having some clean middleware abstraction would be fan-tas-tic.
+- Despite that Memdb is fairly good to work with!
+- Extremely happy with the way we do querystring parsing.
+- `secure-password` also seems to work rather well!
+- Rust's `match` statements for routing are quite good. Ideally we could have
+  something like a `trie` for production systems, but for smaller systems this
+  is probably about as good as it'll get.
 
 ## License
 [MIT](./LICENSE-MIT) OR [Apache-2.0](./LICENSE-APACHE)
