@@ -31,10 +31,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
   setup_panic!();
   let args = Cli::from_args();
   args.logger.log_all(args.verbosity.log_level())?;
-
-  let listener = args.port.bind()?;
-  let addr = listener.local_addr()?;
-
   let db = Memdb::<String, Vec<u8>>::new();
 
   let service = move || {
@@ -54,12 +50,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     )
   };
 
-  let server = Server::from_tcp(listener)?
-    .serve(service)
-    .map_err(|err| error!("server error {}", err));
-
-  info!("listening on {}", addr);
-  tokio::run(server);
+  let server = Server::from_tcp(args.port.bind()?)?.serve(service);
+  info!("listening on {}", server.local_addr());
+  tokio::run(server.map_err(|err| error!("server error {}", err)));
   Ok(())
 }
 
